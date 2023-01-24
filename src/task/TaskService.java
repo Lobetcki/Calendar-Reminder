@@ -13,9 +13,9 @@ public class TaskService {
     private  Map<Integer, Task> taskMap;
     private Collection<Task> removedTasks;
 
-    public TaskService(Map<Integer, Task> taskMap, Collection<Task> removedTasks) {
-        this.taskMap = taskMap;
-        this.removedTasks = removedTasks;
+    public TaskService() {
+        this.taskMap = new HashMap<>();
+        this.removedTasks = new ArrayList<>();
     }
 
     public void add(Task task) {
@@ -23,17 +23,39 @@ public class TaskService {
     }
 
     public Task remove (int id) throws TaskNotFoundException {
-        Collections.addAll(removedTasks, taskMap.get(id));
-        Task temp = taskMap.get(id);
-        taskMap.remove(id);
+        if (taskMap.containsKey(id)) {
+            Collections.addAll(removedTasks, taskMap.get(id));
+            Task temp = taskMap.get(id);
+            taskMap.remove(id);
+            return temp;
+        } else {
+            throw new TaskNotFoundException();
+        }
 
-        return temp;
     }
 
     public Collection<Task> getAllByDate(LocalDate localDate) {
         return taskMap.values().stream().filter(e ->e.appearsln(localDate)).collect(Collectors.toList());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TaskService that = (TaskService) o;
+        return taskMap.equals(that.taskMap) && removedTasks.equals(that.removedTasks);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(taskMap, removedTasks);
+    }
 
+    @Override
+    public String toString() {
+        return "TaskService{" +
+                "taskMap=" + taskMap +
+                ", removedTasks=" + removedTasks +
+                '}';
+    }
 }

@@ -1,11 +1,10 @@
 package task;
 
-import enams.Repeatability;
 import enams.Type;
+import exception.IncorrectArgumentException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 public abstract class Task {
@@ -16,8 +15,8 @@ public abstract class Task {
     private Type tupe;
     private int id;
 
-    private LocalDateTime dateTimeate; //= new LocalDateTime();
-    //public enum Tupe { PERSONAL, WORCK; }
+    private LocalDateTime dateTimeate;
+
 
     private String description;
 
@@ -52,22 +51,26 @@ public abstract class Task {
         return tupe;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title) throws IncorrectArgumentException {
+        if (title == null || title.isBlank()) {
+            throw new IncorrectArgumentException("Неверно введены данные");
+        } else {
         this.title = title;
+        }
     }
-
 
     public String getTitle() {
         return title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String description) throws IncorrectArgumentException {
+        if (title == null || title.isBlank()) {
+            throw new IncorrectArgumentException("Неверно введены данные");
+        } else {
+            this.description = description;
+        }
     }
 
-//    public void setTupe(Type tupe) {
-//        this.tupe = tupe;
-//    }
     public LocalDateTime getDateTimeate() {
         return dateTimeate;
     }

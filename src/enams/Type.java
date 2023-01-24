@@ -4,7 +4,4 @@ public enum Type {
     PERSONAL,
     WORCK;
 
-
-
-
 }
