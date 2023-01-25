@@ -19,7 +19,7 @@ public class TaskService {
     }
 
     public void add(Task task) {
-        this.taskMap.put(task.getId(), task);
+        taskMap.put(task.getId(), task);
     }
 
     public Task remove (int id) throws TaskNotFoundException {

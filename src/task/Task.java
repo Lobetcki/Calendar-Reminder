@@ -10,7 +10,7 @@ import java.util.Objects;
 public abstract class Task {
 
 
-    private int idGenerator;
+    private static int idGenerator;
     private String title ;
     private Type tupe;
     private int id;
