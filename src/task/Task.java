@@ -12,21 +12,23 @@ public abstract class Task {
 
     private static int idGenerator;
     private String title ;
-    private Type tupe;
-    private int id;
+    private final Type tupe;
+    private final int id;
 
-    private LocalDateTime dateTimeate;
+    private final LocalDateTime dateTimeate;
 
 
     private String description;
 
     public Task(String title, Type tupe, LocalDateTime dateTimeate, String description) {
         idGenerator++;
-        this.title = title;
-        this.tupe = tupe;
         this.id = idGenerator;
+        this.tupe = tupe;
         this.dateTimeate = dateTimeate;
-        this.description = description;
+        setTitle(title);
+        //this.title = title;
+        setDescription(description);
+        //this.description = description;
     }
 
     @Override
@@ -83,13 +85,13 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "объект-Task{" +
                 ", title='" + title + '\'' +
                 ", tupe=" + tupe +
                 ", id=" + id +
                 ", dateTimeate=" + dateTimeate +
                 ", description='" + description + '\'' +
-                '}';
+                '}' + "\n";
     }
 }
 

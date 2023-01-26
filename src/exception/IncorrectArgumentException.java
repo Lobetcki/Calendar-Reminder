@@ -2,7 +2,7 @@ package exception;
 
 import java.io.IOException;
 
-public class IncorrectArgumentException extends IOException {
+public class IncorrectArgumentException extends RuntimeException {
 
     public IncorrectArgumentException(String argument) {
         this.argument = argument;
