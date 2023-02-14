@@ -1,8 +1,8 @@
 package task;
 
-import enams.Repeatability;
 import enams.Type;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class DailyTasck extends Task{
@@ -13,7 +13,9 @@ public class DailyTasck extends Task{
     }
 
     @Override
-    public boolean appearsln(LocalDateTime localDateTime) {
-        return false;
+    public boolean appearsln(LocalDate localDate) {
+        return localDate.isAfter(getDateTimeate().toLocalDate()) || localDate.isEqual(getDateTimeate().toLocalDate());
+
     }
+
 }

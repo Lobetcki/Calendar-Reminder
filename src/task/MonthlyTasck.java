@@ -1,8 +1,8 @@
 package task;
 
-import enams.Repeatability;
 import enams.Type;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class MonthlyTasck extends Task{
@@ -13,7 +13,11 @@ public class MonthlyTasck extends Task{
     }
 
     @Override
-    public boolean appearsln(LocalDateTime localDateTime) {
-        return false;
+    public boolean appearsln(LocalDate localDate) {
+        //return localDate.equals(getDateTimeate().toLocalDate())
+        return  localDate.getDayOfMonth() == getDateTimeate().getDayOfMonth()
+                && localDate.isAfter(getDateTimeate().toLocalDate().minusDays(1));
     }
+
+
 }

@@ -1,33 +1,34 @@
 package task;
 
-import enams.Repeatability;
 import enams.Type;
+import exception.IncorrectArgumentException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 public abstract class Task {
 
 
-    private int idGenerator;
+    private static int idGenerator;
     private String title ;
-    private Type tupe;
-    private int id;
+    private final Type tupe;
+    private final int id;
 
-    private LocalDateTime dateTimeate; //= new LocalDateTime();
-    //public enum Tupe { PERSONAL, WORCK; }
+    private final LocalDateTime dateTimeate;
+
 
     private String description;
 
     public Task(String title, Type tupe, LocalDateTime dateTimeate, String description) {
         idGenerator++;
-        this.title = title;
-        this.tupe = tupe;
         this.id = idGenerator;
+        this.tupe = tupe;
         this.dateTimeate = dateTimeate;
-        this.description = description;
+        setTitle(title);
+        //this.title = title;
+        setDescription(description);
+        //this.description = description;
     }
 
     @Override
@@ -52,22 +53,26 @@ public abstract class Task {
         return tupe;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title) throws IncorrectArgumentException {
+        if (title == null || title.isBlank()) {
+            throw new IncorrectArgumentException("Неверно введены данные");
+        } else {
         this.title = title;
+        }
     }
-
 
     public String getTitle() {
         return title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String description) throws IncorrectArgumentException {
+        if (title == null || title.isBlank()) {
+            throw new IncorrectArgumentException("Неверно введены данные");
+        } else {
+            this.description = description;
+        }
     }
 
-//    public void setTupe(Type tupe) {
-//        this.tupe = tupe;
-//    }
     public LocalDateTime getDateTimeate() {
         return dateTimeate;
     }
@@ -80,13 +85,13 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "объект-Task{" +
                 ", title='" + title + '\'' +
                 ", tupe=" + tupe +
                 ", id=" + id +
                 ", dateTimeate=" + dateTimeate +
                 ", description='" + description + '\'' +
-                '}';
+                '}' + "\n";
     }
 }
 
